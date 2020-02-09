@@ -3,7 +3,7 @@ import { Model, Connection } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel, InjectConnection } from '@nestjs/mongoose';
 
-import { AccountsService } from '../accounts.service';
+import { AccountsService } from '../accounts/accounts.service';
 import { Transaction } from '../interfaces/transaction.interface';
 import { Account } from 'src/interfaces/account.interface';
 

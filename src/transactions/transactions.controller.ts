@@ -10,7 +10,7 @@ import {
 import { ApiResponse } from '@nestjs/swagger';
 
 import { TransactionsService } from './transactions.service';
-import { AccountsService } from '../accounts.service';
+import { AccountsService } from '../accounts/accounts.service';
 import { Transaction } from '../interfaces/transaction.interface';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { ResponseTransactionsDto } from './dto/response-transactions.dto';

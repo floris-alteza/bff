@@ -20,6 +20,20 @@ Start! `docker-compose up`
 
 Once the server has started the swagger documentation can be found at [http://localhost:3000/api/](http://localhost:3000/api/)
 
+In the swagger-ui you can find how to connect to the backend.
+
+### Example
+
+```javascript
+fetch('http://localhost:3000/accounts')
+  .then(response => {
+    return response.json();
+  })
+  .catch(error => {
+    console.error(error);
+  });
+```
+
 ## TODO
 
 Where can i start...
