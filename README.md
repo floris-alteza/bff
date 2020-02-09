@@ -26,10 +26,10 @@ In the swagger-ui you can find how to connect to the backend.
 
 ```javascript
 fetch('http://localhost:3000/accounts')
-  .then(response => {
-    return response.json();
+  .then(async (response) => {
+    console.log(await response.json());
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
   });
 ```
