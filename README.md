@@ -10,8 +10,6 @@ If only we had a frontend...
 
 ## Installation
 
-Use node v7
-
 Install and run [Docker](https://docs.docker.com/install/)
 
 Clone this repo `git clone https://github.com/floris-alteza/bank-backend.git`
