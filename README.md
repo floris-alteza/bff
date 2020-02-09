@@ -12,7 +12,7 @@ If only we had a frontend...
 
 Install and run [Docker](https://docs.docker.com/install/)
 
-Clone this repo `git clone https://github.com/floris-alteza/bank-backend.git`
+Clone this repo `git clone https://github.com/floris-alteza/bff.git`
 
 Start! `docker-compose up`
 
