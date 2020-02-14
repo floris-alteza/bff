@@ -8,7 +8,7 @@ import {
   NotFoundException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { ApiResponse, ApiProperty } from '@nestjs/swagger';
+import { ApiResponse } from '@nestjs/swagger';
 
 import { IdDto } from './dto/id.dto';
 import { CreateAccountDto } from './dto/create-account.dto';

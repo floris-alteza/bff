@@ -22,14 +22,23 @@ Once the server has started the swagger documentation can be found at [http://lo
 
 In the swagger-ui you can find how to connect to the backend.
 
+## Local development
+
+The easiest way to make changes to this project is to run it locally. To run it locally we need to spin up the mongo docker image and set the correct config connection to the docker container. After that we just need to install and run. NestJS uses prettier so it might be handy to install a plugin that fixes styling on save.
+
+- `cp .env.example .env`
+- `docker-compose up mongo`
+- `npm install`
+- `npm run start:dev`
+
 ### Example
 
 ```javascript
 fetch('http://localhost:3000/accounts')
-  .then(async (response) => {
+  .then(async response => {
     console.log(await response.json());
   })
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
   });
 ```
@@ -38,7 +47,7 @@ fetch('http://localhost:3000/accounts')
 
 Where can i start...
 
-- Implement configs
+- Add examples
 - Tests
 - Clean up code
 - Use Nestjs how it is intended (this is a first try)

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AccountSchema } from './schemas/account.schema';
 import { TransactionSchema } from './schemas/transaction.schema';
@@ -11,10 +12,17 @@ import { TransactionsController } from './transactions/transactions.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://mongo/alteza-bank-db', {
-      useNewUrlParser: true,
-      user: 'alteza',
-      pass: 'testww',
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule.forRoot()],
+      useFactory: (configService: ConfigService) => ({
+        uri: `mongodb://${configService.get(
+          'DATABASE_HOST',
+        )}/${configService.get('DATABASE_DATABASE')}`,
+        user: configService.get('DATABASE_USER'),
+        pass: configService.get('DATABASE_PASSWORD'),
+        useNewUrlParser: true,
+      }),
+      inject: [ConfigService],
     }),
     MongooseModule.forFeature([
       { name: 'Account', schema: AccountSchema },
