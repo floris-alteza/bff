@@ -5,7 +5,7 @@ import { InjectModel, InjectConnection } from '@nestjs/mongoose';
 
 import { AccountsService } from '../accounts/accounts.service';
 import { Transaction } from '../interfaces/transaction.interface';
-import { Account } from 'src/interfaces/account.interface';
+import { Account } from '../interfaces/account.interface';
 
 @Injectable()
 export class TransactionsService {

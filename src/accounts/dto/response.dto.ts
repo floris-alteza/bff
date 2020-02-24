@@ -1,6 +1,12 @@
 import { IsString, IsEmail, IsNumber } from 'class-validator';
 
-export class CreateAccountDto {
+export class AccountDto {
+  @IsString()
+  readonly _id: string;
+
+  @IsString()
+  readonly accountNumber: string;
+
   @IsString()
   readonly initials: string;
 
@@ -19,6 +25,9 @@ export class CreateAccountDto {
   @IsString()
   readonly phone: string;
 
-  @IsNumber({ maxDecimalPlaces: 2 })
-  readonly balance: number;
+  @IsString()
+  readonly balance: string;
+
+  @IsNumber()
+  readonly __v?: number;
 }

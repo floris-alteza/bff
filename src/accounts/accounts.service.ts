@@ -2,8 +2,7 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Account } from '../interfaces/account.interface';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
+import { UpdateAccountDto, CreateAccountDto } from './dto/request.body.dto';
 
 @Injectable()
 export class AccountsService {

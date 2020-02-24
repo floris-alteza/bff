@@ -2,13 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { AccountSchema } from './schemas/account.schema';
-import { TransactionSchema } from './schemas/transaction.schema';
-
-import { AccountsService } from './accounts/accounts.service';
-import { AccountsController } from './accounts/accounts.controller';
-import { TransactionsService } from './transactions/transactions.service';
-import { TransactionsController } from './transactions/transactions.controller';
+import { AccountsModule } from './accounts/accounts.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -24,12 +19,10 @@ import { TransactionsController } from './transactions/transactions.controller';
       }),
       inject: [ConfigService],
     }),
-    MongooseModule.forFeature([
-      { name: 'Account', schema: AccountSchema },
-      { name: 'Transaction', schema: TransactionSchema },
-    ]),
+    AccountsModule,
+    TransactionsModule,
   ],
-  controllers: [AccountsController, TransactionsController],
-  providers: [AccountsService, TransactionsService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
