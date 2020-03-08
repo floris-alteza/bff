@@ -33,6 +33,8 @@ The easiest way to make changes to this project is to run it locally. To run it 
 
 ### Example
 
+An example html is located in the example folder. It shows how to get all the accounts and transactions and how to make an transaction.
+
 ```javascript
 fetch('http://localhost:3000/accounts')
   .then(async response => {

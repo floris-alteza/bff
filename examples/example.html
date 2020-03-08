@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+  <title>Look at the console!</title>
+  <script>
+
+  const getAccounts = async() => {
+    const accounts = await fetch('http://localhost:3000/accounts');
+    return await accounts.json();
+  };
+
+  const makeTransaction = async (fromAccountId, toAccountNumber, amount) => {
+    const createTransaction = await fetch(`http://localhost:3000/accounts/${fromAccountId}/transactions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        to: toAccountNumber,
+        amount: amount
+      })
+    });
+    return await createTransaction.json();
+  };
+
+  const getTransactions = async(accountId) => {
+    const transactions = await fetch(`http://localhost:3000/accounts/${accountId}/transactions`);
+    return await transactions.json();
+  };
+
+  const doStuff = async () => {
+    // get all accounts
+    const accounts = await getAccounts();
+    console.table(accounts);
+
+    // set the from as an id and the to as a number
+    const from = accounts[0]._id;
+    const to = accounts[1].accountNumber;
+    const transation = await makeTransaction(from, to, 100);
+    console.log('Transaction', transation);
+
+    // get all transations from the first account
+    const transactions = await getTransactions(from);
+    console.table(transactions);
+  };
+
+  doStuff();
+
+  </script>
+</head>
+<body>
+  Its all in the console!
+</body>
+</html>
