@@ -1,21 +1,27 @@
-import { IsString, IsEmail, IsNumber } from 'class-validator';
+import { IsString, IsEmail, IsNumber, IsOptional } from 'class-validator';
 
 export class UpdateAccountDto {
+  @IsOptional()
   @IsString()
   readonly initials?: string;
 
+  @IsOptional()
   @IsString()
   readonly lastname?: string;
 
+  @IsOptional()
   @IsEmail()
   readonly email?: string;
 
+  @IsOptional()
   @IsString()
   readonly street?: string;
 
+  @IsOptional()
   @IsString()
   readonly city?: string;
 
+  @IsOptional()
   @IsString()
   readonly phone?: string;
 }
