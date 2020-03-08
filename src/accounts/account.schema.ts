@@ -44,7 +44,6 @@ AccountSchema.methods.changeBalance = function(
   change: number,
   cb,
 ): Promise<Account> {
-  console.log(change, this);
   const balanceFloat = parseFloat(this.balance);
   const newBalance = balanceFloat + change;
   // damn floats

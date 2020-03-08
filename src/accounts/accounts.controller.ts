@@ -8,26 +8,19 @@ import {
   NotFoundException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
 
-import { IdDto } from './dto/id.dto';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
-import { ResponseAccountDto } from './dto/response-account.dto';
 import { AccountsService } from './accounts.service';
-import { Account } from '../interfaces/account.interface';
+
+import { IdDto } from './dto/request.params.dto';
+import { UpdateAccountDto, CreateAccountDto } from './dto/request.body.dto';
+import { AccountDto } from './dto/response.dto';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Get()
-  @ApiResponse({
-    status: 200,
-    type: ResponseAccountDto,
-    isArray: true,
-  })
-  async findAll(): Promise<Account[]> {
+  async findAll(): Promise<AccountDto[]> {
     try {
       return await this.accountsService.findAll();
     } catch (err) {
@@ -36,11 +29,7 @@ export class AccountsController {
   }
 
   @Get(':id')
-  @ApiResponse({
-    status: 200,
-    type: ResponseAccountDto,
-  })
-  async find(@Param() { id }: IdDto): Promise<Account> {
+  async find(@Param() { id }: IdDto): Promise<AccountDto> {
     const account = await this.accountsService.find(id);
     if (!account) {
       throw new NotFoundException();
@@ -49,11 +38,9 @@ export class AccountsController {
   }
 
   @Post()
-  @ApiResponse({
-    status: 201,
-    type: ResponseAccountDto,
-  })
-  async create(@Body() createAccountDto: CreateAccountDto) {
+  async create(
+    @Body() createAccountDto: CreateAccountDto,
+  ): Promise<AccountDto> {
     try {
       const newAccount = await this.accountsService.create(createAccountDto);
       return newAccount;

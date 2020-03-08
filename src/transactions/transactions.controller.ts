@@ -5,17 +5,14 @@ import {
   Body,
   Param,
   NotFoundException,
-  InternalServerErrorException,
 } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
 
 import { TransactionsService } from './transactions.service';
 import { AccountsService } from '../accounts/accounts.service';
-import { Transaction } from '../interfaces/transaction.interface';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { ResponseTransactionsDto } from './dto/response-transactions.dto';
-import { ResponseCreateTransactionDto } from './dto/response-create-transaction.dto';
-import { AccountIdDto } from './dto/accountId.dto';
+
+import { CreateTransactionDto } from './dto/request.body.dto';
+import { PopulatedTransactionDto, TransactionDto } from './dto/response.dto';
+import { AccountIdDto } from './dto/request.params.dto';
 
 @Controller('accounts/:accountId/transactions')
 export class TransactionsController {
@@ -25,30 +22,22 @@ export class TransactionsController {
   ) {}
 
   @Get()
-  @ApiResponse({
-    status: 200,
-    type: ResponseTransactionsDto,
-    isArray: true,
-  })
   async findAllFromAccont(
     @Param() { accountId }: AccountIdDto,
-  ): Promise<Transaction[]> {
+  ): Promise<PopulatedTransactionDto[]> {
     const transactions = await this.transactionsService.findAll(accountId);
     if (!transactions) {
       throw new NotFoundException();
     }
-    return transactions;
+    // typescript doesnt understand the populated transactions
+    return transactions as any;
   }
 
   @Post()
-  @ApiResponse({
-    status: 201,
-    type: ResponseCreateTransactionDto,
-  })
   async create(
     @Param() { accountId }: AccountIdDto,
     @Body() createTransactionDto: CreateTransactionDto,
-  ) {
+  ): Promise<TransactionDto> {
     const { to, amount } = createTransactionDto;
     try {
       const [fromAccount, toAccount] = await Promise.all([
@@ -59,7 +48,7 @@ export class TransactionsController {
         throw new NotFoundException('From Account not found');
       }
       if (!toAccount) {
-        throw new NotFoundException('From Account not found');
+        throw new NotFoundException('To Account not found');
       }
       const newTransaction = await this.transactionsService.create(
         fromAccount,
@@ -67,8 +56,8 @@ export class TransactionsController {
         amount,
       );
       return newTransaction;
-    } catch (err) {
-      throw new InternalServerErrorException();
+    } catch (error) {
+      throw error;
     }
   }
 }
