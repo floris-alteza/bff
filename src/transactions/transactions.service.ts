@@ -16,8 +16,8 @@ export class TransactionsService {
     private readonly transactionModel: Model<Transaction>,
   ) {}
 
-  async findAll(userId: string) {
-    const account = await this.accountsService.find(userId);
+  async findAll(accountId: string) {
+    const account = await this.accountsService.find(accountId);
     return this.transactionModel
       .find({
         $or: [{ from: account._id }, { to: account._id }],

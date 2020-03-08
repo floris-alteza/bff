@@ -5,7 +5,6 @@ import {
   Body,
   Param,
   NotFoundException,
-  InternalServerErrorException,
 } from '@nestjs/common';
 
 import { TransactionsService } from './transactions.service';
@@ -57,8 +56,8 @@ export class TransactionsController {
         amount,
       );
       return newTransaction;
-    } catch (err) {
-      throw new InternalServerErrorException();
+    } catch (error) {
+      throw error;
     }
   }
 }

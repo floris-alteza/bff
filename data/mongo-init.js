@@ -18,6 +18,7 @@ db.accounts.insertMany([
     city: 'Utrecht',
     phone: '0612345678',
     balance: '10000',
+    accountNumber: '4813001120',
   },
   {
     lastname: 'Kessels',
@@ -27,5 +28,6 @@ db.accounts.insertMany([
     city: 'Malden',
     phone: '0612345678',
     balance: '10000',
+    accountNumber: '1002809597',
   },
 ]);
